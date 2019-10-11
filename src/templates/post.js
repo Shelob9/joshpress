@@ -18,7 +18,7 @@ export const BlogPostTemplate = ({post,previewMode}) => {
     <section className="section">
       <article className={`container content post-${id} post type-post status-publish format-standard hentry category-uncategorized entry`}>
         <div className="columns">
-          <div className="column is-10 is-offset-1">
+          <div className="column is-8">
           <header className="entry-header">
             <Featured post={post} />
             {previewMode &&
