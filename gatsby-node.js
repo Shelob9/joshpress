@@ -17,6 +17,21 @@ exports.createPages = ({ actions, graphql }) => {
             id
             slug
             status
+            featured_media {
+              title
+              caption
+              alt_text
+              source_url
+              localFile {
+                childImageSharp {
+                  fixed(width: 500, height: 300) {
+                    src
+                    srcSet,
+                    srcSetWebp
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -60,6 +75,21 @@ exports.createPages = ({ actions, graphql }) => {
                 id
                 slug
                 status
+                featured_media {
+                  title
+                  caption
+                  alt_text
+                  source_url
+                  localFile {
+                    childImageSharp {
+                      fixed(width: 500, height: 300) {
+                        src
+                        srcSet,
+                        srcSetWebp
+                      }
+                    }
+                  }
+                }
               }
             }
           }

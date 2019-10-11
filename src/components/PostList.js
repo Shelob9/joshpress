@@ -1,11 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
+import Img from 'gatsby-image';
+function Featured({post}){
 
+  if( ! post.hasOwnProperty('featured_media') || null === post.featured_media) {
+    return <React.Fragment />
+  }
+  const {
+    fixed
+  } = post.featured_media.localFile.childImageSharp;
+  return (
+    <Img
+      src={post.featured_media.source_url} 
+      alt={post.featured_media.alt_text} 
+      title={post.featured_media.title}
+      fixed={fixed}
+      objectFit="cover"
+      objectPosition="100% 50%"
+
+  />
+
+    
+  )
+}
 export default class IndexPage extends React.Component {
   render() {
     const { posts, title } = this.props
-
     return (
       <section className="section">
         <div className="container">
@@ -18,6 +39,7 @@ export default class IndexPage extends React.Component {
               style={{ border: '1px solid #eaecee', padding: '2em 4em' }}
               key={post.id}
             >
+              <Featured post={post} />
               <p>
                 <Link className="has-text-primary" to={post.slug}>
                   {post.title}
@@ -67,5 +89,26 @@ export const pageQuery = graphql`
     }
     date(formatString: "MMMM DD, YYYY")
     slug
+    featured_media {
+      title
+      caption
+      alt_text
+      source_url
+      localFile {
+        childImageSharp {
+          fixed(width: 900, height: 400) {
+            src
+            srcSet
+            srcSetWebp
+            height
+            width
+            base64
+            tracedSVG
+            srcWebp
+            srcSetWebp
+          }
+        }
+      }
+    }
   }
 `
