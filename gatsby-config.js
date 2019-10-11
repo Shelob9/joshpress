@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + WordPress Starter',
+    title: 'Josh Pollock',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -52,6 +52,15 @@ module.exports = {
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
+    `gatsby-plugin-styled-components`,
     {
       // Removes unused css rules
       resolve:'gatsby-plugin-purgecss',
