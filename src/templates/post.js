@@ -4,16 +4,15 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Featured from '../components/Featured';
-export const BlogPostTemplate = ({post}) => {
+export const BlogPostTemplate = ({post,previewMode}) => {
   const {
-
       content,
       id,
       slug,
       title,
       date,
       author,
-      
+      excerpt
   } = post;
   return (
     <section className="section">
@@ -22,21 +21,37 @@ export const BlogPostTemplate = ({post}) => {
           <div className="column is-10 is-offset-1">
           <header className="entry-header">
             <Featured post={post} />
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
+            {previewMode &&
+            (
+              <h2 className="title is-size-2 has-text-weight-bold is-bold-light">
+                <a href={`/${slug}`}>{title}!!!!</a>
+              </h2>
+
+            )}
+            {!previewMode &&
+              (
+                <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
+                  {title}
+                </h1>
+              )}         
+            
             <div style={{ marginTop: `4rem`, marginBottom: `2rem` }}>
               <p>
                 {author.name} - {date}
               </p>
             </div>
             </header>
-            <main
+            <div className={`entry-content`}
                 dangerouslySetInnerHTML={{
-                  __html: content,
+                  __html: previewMode ? excerpt : content,
                 }}
               />
+              {previewMode && <Link className="button is-large" to={post.slug}>
+                 Read More →
+                </Link>
+              }
             </div>
+
        </div>
       </article>
     </section>
@@ -45,6 +60,12 @@ export const BlogPostTemplate = ({post}) => {
 
 BlogPostTemplate.propTypes = {
   post: PropTypes.object.isRequired,
+  previewMode: PropTypes.bool
+}
+
+BlogPostTemplate.defeautProps = {
+  previewMode: false
+
 }
 
 const BlogPost = ({ data }) => {
@@ -82,6 +103,7 @@ export const pageQuery = graphql`
       title
       slug
       content
+      excerpt
       date(formatString: "MMMM DD, YYYY")
       author {
         name
