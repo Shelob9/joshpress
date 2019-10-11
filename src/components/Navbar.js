@@ -21,7 +21,7 @@ const Navbar = () => (
         <div className="container">
           <div className="navbar-brand">
             <Link to="/" className="navbar-item">
-              Josh Pollock
+            <h1 className="has-text-weight-bold is-size-2">Josh Pollock</h1>
             </Link>
           </div>
           <div className="navbar-end">

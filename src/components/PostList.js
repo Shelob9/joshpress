@@ -10,7 +10,7 @@ export default class IndexPage extends React.Component {
       <section className="section">
         <div className="container">
           <div className="content">
-            <h1 className="has-text-weight-bold is-size-2">{title}</h1>
+            <h1 className="has-text-weight-bold is-size-3">{title}</h1>
           </div>
           {posts.map(({ node: post }) => (
               <BlogPostTemplate post={post} key={post.id} previewMode={true} />
@@ -47,7 +47,7 @@ export const pageQuery = graphql`
       source_url
       localFile {
         childImageSharp {
-          fixed(width: 900, height: 400) {
+          fixed(width: 1200, height: 400) {
             src
             srcSet
             srcSetWebp
@@ -58,6 +58,7 @@ export const pageQuery = graphql`
             srcWebp
             srcSetWebp
           }
+          
         }
       }
     }

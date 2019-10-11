@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
@@ -18,39 +18,46 @@ export const BlogPostTemplate = ({post,previewMode}) => {
     <section className="section">
       <article className={`container content post-${id} post type-post status-publish format-standard hentry category-uncategorized entry`}>
         <div className="columns">
-          <div className="column is-8">
+          <div className="column">
           <header className="entry-header">
-            <Featured post={post} />
             {previewMode &&
             (
-              <h2 className="title is-size-2 has-text-weight-bold is-bold-light">
-                <a href={`/${slug}`}>{title}!!!!</a>
-              </h2>
-
+              <Fragment>
+                <Featured post={post} />
+                <h2 className="title is-size-4 has-text-weight-bold is-bold-light">
+                  <a href={`/${slug}`} style={{color: '#000'}}>{title}!!!!</a>
+                </h2>
+              </Fragment>
             )}
             {!previewMode &&
               (
-                <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-                  {title}
-                </h1>
-              )}         
-            
-            <div style={{ marginTop: `4rem`, marginBottom: `2rem` }}>
-              <p>
-                {author.name} - {date}
-              </p>
-            </div>
+                <Fragment>
+                  <h1 className="title is-size-3 has-text-weight-bold is-bold-light">
+                    {title}
+                  </h1>
+                  <div style={{ marginTop: `4rem`, marginBottom: `2rem` }}>
+                    <p>
+                      {author.name} - {date}
+                    </p>
+                  </div>
+                  <div style={{ marginTop: `4rem`, marginBottom: `2rem` }}>
+                    <Featured post={post} />
+                  </div>
+                </Fragment>              
+              )}                              
             </header>
-            <div className={`entry-content`}
-                dangerouslySetInnerHTML={{
-                  __html: previewMode ? excerpt : content,
-                }}
-              />
-              {previewMode && <Link className="button is-large" to={post.slug}>
-                 Read More →
-                </Link>
-              }
-            </div>
+            <div 
+              className={`entry-content`}
+              style={{marginBottom: '2rem'}}  
+              dangerouslySetInnerHTML={{
+                __html: previewMode ? excerpt : content,
+              }}
+            />
+            {previewMode && <Link className="button is-large" to={post.slug}>
+                Read More →
+              </Link>
+            }
+          </div>
 
        </div>
       </article>
@@ -116,7 +123,7 @@ export const pageQuery = graphql`
         source_url
         localFile {
           childImageSharp {
-            fixed(width: 900, height: 400) {
+            fixed(width: 1200, height: 400) {
               src
               srcSet
               srcSetWebp
@@ -128,6 +135,7 @@ export const pageQuery = graphql`
               srcSetWebp
             }
           }
+          
         }
       }
     }
