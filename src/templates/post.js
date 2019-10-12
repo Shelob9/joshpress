@@ -9,7 +9,7 @@ export const BlogPostTemplate = ({ post, previewMode }) => {
 	return (
 		<section className="section">
 			<article
-				className={`container content post-${id} post type-post status-publish format-standard hentry category-uncategorized entry`}
+				className={`container content post-${id} status-publish format-standard hentry entry`}
 			>
 				<div className="columns">
 					<div className="column">

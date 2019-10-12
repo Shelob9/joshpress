@@ -1,0 +1,13 @@
+blockquote.twitter-tweet,
+blockquote.twitter-tweet p {
+	color: #3d4852;
+	padding: 0.8em;
+}
+
+blockquote.twitter-tweet p {
+	margin-left: 4px;
+}
+
+article p {
+	font-size: 1.68em;
+}

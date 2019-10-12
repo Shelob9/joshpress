@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import Helmet from 'react-helmet'
 
 import './all.sass'
+import './josh.css'
 const TemplateWrapper = ({ children, title }) => (
 	<Fragment>
 		<Helmet
