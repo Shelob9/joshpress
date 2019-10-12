@@ -2,6 +2,7 @@ module.exports = {
 	siteMetadata: {
 		title: 'Josh Pollock',
 		description: 'Josh Pollock | Internet Blog',
+		siteUrl: 'https://joshpress.net',
 	},
 	plugins: [
 		'gatsby-plugin-react-helmet',
@@ -51,18 +52,19 @@ module.exports = {
 				},
 			},
 		},
+		`gatsby-plugin-advanced-sitemap`,
 		{
-			resolve: `gatsby-plugin-csp`,
+			resolve: 'gatsby-plugin-robots-txt',
 			options: {
-				disableOnDev: true,
-				reportOnly: false, // Changes header to Content-Security-Policy-Report-Only for csp testing purposes
-				mergeScriptHashes: true, // you can disable scripts sha256 hashes
-				mergeStyleHashes: true, // you can disable styles sha256 hashes
-				mergeDefaultDirectives: true,
-				directives: {
-					'script-src': "'self'",
-					'style-src': "'self' 'unsafe-inline'",
-					'img-src': "'self",
+				host: 'https://joshpress.net',
+				sitemap: 'https://joshpress.net/sitemap.xml',
+				env: {
+					development: {
+						policy: [{ userAgent: '*', allow: ['/'] }],
+					},
+					production: {
+						policy: [{ userAgent: '*', disallow: '/' }],
+					},
 				},
 			},
 		},
