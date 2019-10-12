@@ -1,6 +1,7 @@
 module.exports = {
 	siteMetadata: {
-		title: 'Gatsby + WordPress Starter',
+		title: 'Josh Pollock',
+		description: 'Josh Pollock | Internet Blog',
 	},
 	plugins: [
 		'gatsby-plugin-react-helmet',
@@ -74,7 +75,7 @@ module.exports = {
 				background_color: `#fff`,
 				theme_color: `#3d4852`,
 				display: `standalone`,
-				icon: `src/icon.png`,
+				icon: `src/img/icon.png`,
 			},
 		},
 		{
