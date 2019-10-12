@@ -7,16 +7,14 @@ export default function Featured({ post }) {
 	) {
 		return <React.Fragment />
 	}
-	const { fixed } = post.featured_media.localFile.childImageSharp
+	const { fluid } = post.featured_media.localFile.childImageSharp
 	return (
 		<Img
-			className={'-full-width-image-container'}
 			src={post.featured_media.source_url}
 			alt={post.featured_media.alt_text}
 			title={post.featured_media.title}
-			fixed={fixed}
-			objectFit="cover"
-			objectPosition="100% 50%"
+			fluid={fluid}
+			loading={'lazy'}
 		/>
 	)
 }

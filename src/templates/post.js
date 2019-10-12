@@ -127,16 +127,17 @@ export const pageQuery = graphql`
 				source_url
 				localFile {
 					childImageSharp {
-						fixed(width: 1200, height: 400) {
+						fluid(maxWidth: 1200, maxHeight: 400) {
 							src
+							sizes
 							srcSet
-							srcSetWebp
-							height
-							width
-							base64
-							tracedSVG
 							srcWebp
 							srcSetWebp
+							tracedSVG
+							aspectRatio
+							presentationWidth
+							presentationHeight
+							base64
 						}
 					}
 				}
