@@ -5,19 +5,18 @@ import Layout from '../components/Layout'
 import PostList from '../components/PostList'
 import Pagination from '../components/Pagination'
 
-export default class IndexPage extends React.Component {
-  render() {
-    const { data, pageContext } = this.props
+export default function IndexPage(props){
+    const { data, pageContext } = props;
     const { edges: posts } = data.allWordpressPost
 
     return (
       <Layout>
-        <PostList posts={posts} title="Latest posts" />
+        <PostList posts={posts} title="Blog" />
         <Pagination pageContext={pageContext} pathPrefix="/" />
       </Layout>
     )
   }
-}
+
 
 IndexPage.propTypes = {
   data: PropTypes.shape({

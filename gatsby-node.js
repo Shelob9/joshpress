@@ -172,6 +172,41 @@ exports.createPages = ({ actions, graphql }) => {
     .then(() => {
       return graphql(`
         {
+          allWordpressCategory(filter: { count: { gt: 0 } }) {
+            edges {
+              node {
+                name
+                slug
+              }
+            }
+          }
+        }
+      `)
+    })
+
+    .then(result => {
+      if (result.errors) {
+        result.errors.forEach(e => console.error(e.toString()))
+        return Promise.reject(result.errors)
+      }
+
+      const categoryTemplate = path.resolve(`./src/templates/category.js`)
+
+      // Create a Gatsby page for each WordPress category
+      _.each(result.data.allWordpressCategory.edges, ({ node: category }) => {
+        createPage({
+          path: `/category/${category.slug}/`,
+          component: categoryTemplate,
+          context: {
+            name: category.name,
+            slug: category.slug,
+          },
+        })
+      })
+    })
+    .then(() => {
+      return graphql(`
+        {
           allWordpressWpUsers {
             edges {
               node {
