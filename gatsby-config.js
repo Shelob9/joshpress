@@ -8,9 +8,9 @@ module.exports = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        baseUrl: "joshpress.net",
+        baseUrl: 'joshpress.net',
         // The protocol. This can be http or https.
-        protocol: "https",
+        protocol: 'https',
         hostingWPCOM: false,
         useACF: false,
         // Set how many pages are retrieved per API request.
@@ -29,16 +29,16 @@ module.exports = {
         // all routes that begin with `yoast` from fetch.
         // Whitelisted routes using glob patterns
         includedRoutes: [
-          "**/categories",
-          "**/posts",
-          "**/pages",
-          "**/media",
-          "**/tags",
-          "**/taxonomies",
-          "**/users",
+          '**/categories',
+          '**/posts',
+          '**/pages',
+          '**/media',
+          '**/tags',
+          '**/taxonomies',
+          '**/users',
         ],
         // Blacklisted routes using glob patterns
-       // excludedRoutes: ["**/posts/1456"],
+        // excludedRoutes: ["**/posts/1456"],
         // Set this to keep media sizes.
         // This option is particularly useful in case you need access to
         // URLs for thumbnails, or any other media detail.
@@ -50,11 +50,44 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-csp`,
+      options: {
+        disableOnDev: true,
+        reportOnly: false, // Changes header to Content-Security-Policy-Report-Only for csp testing purposes
+        mergeScriptHashes: true, // you can disable scripts sha256 hashes
+        mergeStyleHashes: true, // you can disable styles sha256 hashes
+        mergeDefaultDirectives: true,
+        directives: {
+          'script-src': "'self'",
+          'style-src': "'self' 'unsafe-inline'",
+          'img-src': "'self",
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Josh Pollock`,
+        short_name: `Josh Pollock`,
+        start_url: `/`,
+        background_color: `#fff`,
+        theme_color: `#3d4852`,
+        display: `standalone`,
+        icon: `src/icon.png`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [`/contact`],
+      },
+    },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
       // Removes unused css rules
-      resolve:'gatsby-plugin-purgecss',
+      resolve: 'gatsby-plugin-purgecss',
       options: {
         // Activates purging in gatsby develop
         develop: true,
